@@ -56,7 +56,7 @@ python demo/demo.py --image_path [Image]  --text [Text]  --model [Config]
 Example:
 
 ```
-python demo/demo.py --image_path demo/einstein.jpg  --text 'Question: What is unusual about this image?\nAnswer:'  --model hpt-air-demo-local
+python demo/demo.py --image_path demo/einstein.jpg  --text 'Question: What is unusual about this image?\nAnswer:'  --model hpt-air-demo
 ```
 
 ## Benchmark Evaluations
