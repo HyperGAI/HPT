@@ -15,7 +15,10 @@ def main():
 	args = parse_args()
 	model_name = args.model
 	model = supported_VLM[model_name]() 
-	response = model.generate(prompt=args.text, image_path=args.image_path, dataset='demo')
+	template = 'Answer with the detailed reasoning process for obtaining the answer, incorporating professional terms when necessary, to address inquiries regarding scene description, key elements identification, and potential activities in the provided image.'
+	text = args.text + template
+	image_path = args.image_path
+	response = model.generate(prompt=text, image_path=image_path, dataset='demo')
 
 	print(response)
 
