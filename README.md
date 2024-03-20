@@ -59,6 +59,8 @@ Example:
 python demo/demo.py --image_path demo/einstein.jpg  --text 'Question: What is unusual about this image?\nAnswer:'  --model hpt-air-demo
 ```
 
+*You can design different prompts here to boost the question.*
+
 ## Benchmark Evaluations
 
 Launch the model for benchmark evaluation:
