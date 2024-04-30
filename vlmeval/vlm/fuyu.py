@@ -92,6 +92,7 @@ class Fuyu8B(CustomPrompt):
 
     def generate(self, image_path, prompt, dataset=None, qtype=''):
         image = Image.open(image_path).convert('RGB')
+        import pdb; pdb.set_trace()
         inputs = self.processor(text=prompt, images=image, return_tensors="pt").to(self.model.device)
         gen_config = self.build_gen_config(dataset, qtype)
 
