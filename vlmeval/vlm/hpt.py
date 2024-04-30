@@ -44,10 +44,11 @@ class HPT(CustomPrompt):
                  prompt_template='internlm2_chat',
                  is_crop=True,
                  stop_words=[],
-                 torch_dtype=torch.float16):
+                 torch_dtype=torch.float16,
+                 pad_image_to_square=False):
         from peft import PeftModel
         from vlmeval.utils import PROMPT_TEMPLATE, StopWordStoppingCriteria
-
+        self.pad_image_to_square = pad_image_to_square
         llm = AutoModelForCausalLM.from_pretrained(global_model_path,
                                                    subfolder='llm',
                                                    trust_remote_code=True,
@@ -231,7 +232,8 @@ class HPT(CustomPrompt):
             image = Image.open(image_path[0]).convert('RGB')
         else:
             image = Image.open(image_path).convert('RGB')
-
+        if self.pad_image_to_square:
+            image = expand2square(image, tuple(int(x * 255) for x in self.image_processor.image_mean))
         image = self.image_processor.preprocess(
             image, return_tensors='pt')['pixel_values'][0]
         image = image.cuda().unsqueeze(0)
