@@ -28,6 +28,7 @@ models = {
     'hpt-air-demo': partial(HPT, vis_scale=392, is_crop=False),
     'hpt-air-demo-local': partial(HPT, vis_scale=392, is_crop=False, global_model_path='../HPT_AIR_HF/'),
     'hpt-air-pad': partial(HPT, pad_image_to_square=True),
+    'fuyu8b': Fuyu8B,
 }
 
 supported_VLM = {}
