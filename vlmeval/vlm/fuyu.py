@@ -100,7 +100,7 @@ class Fuyu8B(CustomPrompt):
         generation_output = self.model.generate(**inputs,
                                                 bos_token_id=self.tokenizer.bos_token_id,
                                                 generation_config=gen_config)
-        import pdb; pdb.set_trace()
+        # import pdb; pdb.set_trace()
         predict = self.processor.batch_decode(generation_output[:, inputs.input_ids.shape[1]:],
                                               skip_special_tokens=True)[0].strip()
         return predict
