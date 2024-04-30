@@ -93,14 +93,15 @@ class Fuyu8B(CustomPrompt):
     def generate(self, image_path, prompt, dataset=None, qtype=''):
         image = Image.open(image_path).convert('RGB')
         # import pdb; pdb.set_trace()
-        inputs = self.processor(text=prompt, images=image, return_tensors="pt").to(self.model.device)
+        inputs = self.processor(text=prompt+'\n\x04', images=image,
+                                return_tensors="pt").to(self.model.device)
         gen_config = self.build_gen_config(dataset, qtype)
 
         # autoregressively generate text
         generation_output = self.model.generate(**inputs,
                                                 bos_token_id=self.tokenizer.bos_token_id,
                                                 generation_config=gen_config)
-        # import pdb; pdb.set_trace()
         predict = self.processor.batch_decode(generation_output[:, inputs.input_ids.shape[1]:],
                                               skip_special_tokens=True)[0].strip()
+        import pdb; pdb.set_trace()
         return predict
