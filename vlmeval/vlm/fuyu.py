@@ -20,9 +20,9 @@ class Fuyu8B(CustomPrompt):
 
     def build_gen_config(self, dataset, qtype):
         gen_kwargs = dict(max_new_tokens=1024,
-                          do_sample=True,
-                          temperature=0.7,
-                          num_beams=5,
+                          do_sample=False,
+                          # temperature=0.7,
+                          num_beams=1,
                           eos_token_id=self.tokenizer.eos_token_id,
                           pad_token_id=self.tokenizer.pad_token_id
                           if self.tokenizer.pad_token_id is not None else
@@ -38,9 +38,9 @@ class Fuyu8B(CustomPrompt):
         elif dataset == 'demo':
             # for demo test
             gen_kwargs = dict(max_new_tokens=1024,
-                              do_sample=True,
-                              temperature=0.2,
-                              top_p=0.7,
+                              do_sample=False,
+                              # temperature=0.2,
+                              # top_p=0.7,
                               num_beams=1,
                               eos_token_id=self.tokenizer.eos_token_id,
                               pad_token_id=self.tokenizer.pad_token_id
@@ -92,7 +92,7 @@ class Fuyu8B(CustomPrompt):
 
     def generate(self, image_path, prompt, dataset=None, qtype=''):
         image = Image.open(image_path).convert('RGB')
-        import pdb; pdb.set_trace()
+        # import pdb; pdb.set_trace()
         inputs = self.processor(text=prompt, images=image, return_tensors="pt").to(self.model.device)
         gen_config = self.build_gen_config(dataset, qtype)
 
