@@ -37,7 +37,7 @@ class HPT1_5(CustomPrompt):
     INSTALL_REQ = True
 
     def __init__(self,
-                 global_model_path='HyperGAI/HPT-1-5-Air-Llama-3-8B',
+                 global_model_path='HyperGAI/HPT1_5-Air-Llama-3-8B-Instruct-multimodal',
                  vis_scale=448,
                  visual_select_layer=-2,
                  prompt_template='llama3_chat',
