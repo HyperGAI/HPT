@@ -89,8 +89,6 @@ torchrun --nproc-per-node=8 run.py --data MMMU_DEV_VAL --model hpt-air-1-5
 <br />
 
 
-[1] *If not specifically mentioned, all listed results are from the test set. You may need to submit the result file into the server to obtain the final score.*
-
 
 ## Pretrained Models Used
 
