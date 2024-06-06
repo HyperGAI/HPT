@@ -29,6 +29,13 @@ class StopWordStoppingCriteria(StoppingCriteria):
 
 
 PROMPT_TEMPLATE = ConfigDict(
+    phi3_chat=dict(
+        SYSTEM='<|system|>\n{system}<|end|>\n',
+        INSTRUCTION='<|user|>\n{input}<|end|>\n<|assistant|>\n',
+        SUFFIX='<|end|>',
+        SUFFIX_AS_EOS=True,
+        SEP='\n',
+        STOP_WORDS=['<|end|>']),
     default=dict(
         SYSTEM='<|System|>:{system}\n',
         INSTRUCTION='<|User|>:{input}\n<|Bot|>:',

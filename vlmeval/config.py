@@ -27,7 +27,8 @@ models = {
     'hpt-air-seed': partial(HPT, is_crop=False),
     'hpt-air-demo': partial(HPT, vis_scale=392, is_crop=False),
     'hpt-air-demo-local': partial(HPT, vis_scale=392, is_crop=False, global_model_path='../HPT_AIR_HF/'),
-    'hpt-air-1-5': partial(HPT1_5),
+    'hpt-air-1-5': partial(HPT1_5, global_model_path='HyperGAI/HPT1_5-Air-Llama-3-8B-Instruct-multimoda', vis_scale=448, prompt_template='llama3_chat'),
+    'hpt-edge-1-5': partial(HPT1_5, global_model_path='HyperGAI/HPT1_5-Edge', vis_scale=490, prompt_template='phi3_chat'),
 }
 
 supported_VLM = {}

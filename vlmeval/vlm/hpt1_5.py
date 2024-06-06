@@ -48,7 +48,6 @@ class HPT1_5(CustomPrompt):
         llm = AutoModelForCausalLM.from_pretrained(global_model_path,
                                                    subfolder='llm',
                                                    trust_remote_code=True,
-                                                   use_safetensors=True,
                                                    torch_dtype=torch_dtype,
                                                    device_map='cpu')
 
@@ -84,7 +83,6 @@ class HPT1_5(CustomPrompt):
 
         projector = AutoModel.from_pretrained(global_model_path,
                                               subfolder='projector',
-                                              use_safetensors=True,
                                               trust_remote_code=True,
                                               torch_dtype=torch_dtype,
                                               )
@@ -166,7 +164,8 @@ class HPT1_5(CustomPrompt):
                 prompt = question + '\n' + ("Answer with succinct phrase or a single word, incorporating professional terms when necessary, to address inquiries regarding scene description, key elements identification, and potential activities in the provided image.") #("Answer the question using a single word or phrase.")
                 qtype = 'open'
             else:
-                prompt = question + '\n' + ("Answer with the option's letter from the given choices directly.")
+                # prompt = question + '\n' + ("Answer with the option's letter from the given choices directly.")
+                prompt = question + '\n'  "Answer the question with the correct option's letter from the given choices."
         else:
             prompt = question + '\n' + '请直接回答选项字母。'
 
@@ -214,8 +213,8 @@ class HPT1_5(CustomPrompt):
             image, return_tensors='pt')['pixel_values'][0]
         image = image.cuda().unsqueeze(0)
         visual_outputs = self.visual_encoder(image, output_hidden_states=True)
-        pixel_values = self.projector(
-            visual_outputs.hidden_states[self.visual_select_layer][:, 1:])
+        # pixel_values = self.projector(visual_outputs.hidden_states[self.visual_select_layer][:, 1:])
+        pixel_values = self.projector(visual_outputs.hidden_states[self.visual_select_layer])
 
         inputs = DEFAULT_IMAGE_TOKEN + '\n' + prompt
 
