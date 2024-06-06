@@ -90,6 +90,7 @@ torchrun --nproc-per-node=8 run.py --data MMMU_DEV_VAL --model hpt-edge-1-5
 </div>
 <br />
 
+- The majority of the results presented are taken from the models‘ original reports while the others are from Phi-3-vision evaluations, which we mark with an asterisk (*).
 - The benchmark result of HPT1.5 Air and HPT1.0 is in assets directory.
 
 
